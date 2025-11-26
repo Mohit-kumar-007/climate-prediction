@@ -1,29 +1,27 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { ClimateResponse } from "../types";
 
-// This service acts as the bridge to your "ML Model". 
-// In a real scenario, this would call your Python backend.
-// Here, Gemini SIMULATES the complex ML prediction based on historical patterns for the given city.
-
-const getGeminiModel = () => {
+// Lightweight bridge to the hosted forecast model. In production this would
+// call your own backend service instead of the client owning the API key.
+const getForecastModel = () => {
   const apiKey = process.env.API_KEY;
   if (!apiKey) {
-    console.error("API Key not found in environment variables");
+    console.error("Forecast API key missing from environment variables");
     return null;
   }
   return new GoogleGenAI({ apiKey });
 };
 
 export const fetchClimatePrediction = async (cityName: string, pinCode: string): Promise<ClimateResponse | null> => {
-  const ai = getGeminiModel();
-  if (!ai) return null;
+  const modelClient = getForecastModel();
+  if (!modelClient) return null;
 
   const prompt = `
-    You are an advanced Meteorological Machine Learning Model for India.
+    You are Climate Prediction, a friendly forecasting assistant focused on cities across India.
     
     Task:
-    1. Retrieve/Simulate current real-time weather data for: ${cityName}, India (PIN: ${pinCode}).
-    2. Run a prediction model for TOMORROW based on historical data patterns for this region.
+    1. Retrieve or simulate current weather for: ${cityName}, India (PIN: ${pinCode}).
+    2. Project tomorrow's conditions based on typical seasonal patterns for this region.
     
     Output Requirements:
     - Provide 'Current' weather accurately.
@@ -34,7 +32,7 @@ export const fetchClimatePrediction = async (cityName: string, pinCode: string):
   `;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await modelClient.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: prompt,
       config: {
