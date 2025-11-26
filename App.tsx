@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchClimatePrediction } from './services/geminiService';
+import { fetchClimatePrediction } from './services/forecastService';
 import DynamicBackground from './components/DynamicBackground';
 import SearchSection from './components/SearchSection';
 import WeatherTabs from './components/WeatherTabs';
@@ -56,11 +56,10 @@ const App: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-white to-blue-200">
-            ClimateAI India
+            Climate Prediction
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Advanced meteorological predictions powered by Machine Learning. 
-            Select your city to view real-time analysis and next-day forecasts.
+            Daily weather insights for Indian cities. Pick a location to see what the skies look like now and how tomorrow is shaping up.
           </p>
         </div>
 
@@ -90,7 +89,7 @@ const App: React.FC = () => {
       
       {/* Footer / Attribution */}
       <footer className="absolute bottom-4 w-full text-center text-white/20 text-sm pointer-events-none">
-        Powered by Gemini AI • Prediction Model v2.5
+        Forecasts generated with Climate Prediction • Build v2.5
       </footer>
     </div>
   );

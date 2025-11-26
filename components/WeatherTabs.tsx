@@ -3,8 +3,7 @@ import {
   CloudRain, 
   Sun, 
   Wind, 
-  Thermometer, 
-  BrainCircuit, 
+  LineChart, 
   Activity, 
   Calendar 
 } from 'lucide-react';
@@ -53,8 +52,8 @@ const WeatherTabs: React.FC<WeatherTabsProps> = ({ data }) => {
                 : 'text-gray-300 hover:text-white hover:bg-white/5'
             }`}
           >
-            <BrainCircuit className="h-4 w-4" />
-            AI Prediction
+            <LineChart className="h-4 w-4" />
+            Tomorrow Outlook
           </button>
         </div>
       </div>
@@ -103,7 +102,7 @@ const WeatherTabs: React.FC<WeatherTabsProps> = ({ data }) => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-white/10 pb-6">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="bg-purple-500/20 text-purple-300 text-xs px-2 py-1 rounded-full border border-purple-500/30">ML Model Output</span>
+                  <span className="bg-purple-500/20 text-purple-300 text-xs px-2 py-1 rounded-full border border-purple-500/30">Forecast Summary</span>
                   <span className="text-gray-400 text-sm flex items-center gap-1"><Calendar className="h-3 w-3"/> Tomorrow's Forecast</span>
                 </div>
                 <h2 className="text-3xl font-bold text-white">Expected: {prediction.tomorrowTemp}°C</h2>
